@@ -1,0 +1,22 @@
+ DESCRIPTION : You are given the head of a singly linked list. You have to reverse the linked list and return the head of the reversed list.
+
+
+Soln : 
+class Solution:
+    def reverseList(self, head):
+        # Code here
+        prev = None
+        curr = head
+        while curr is not None:
+            nex_node=curr.next
+            curr.next = prev
+            prev = curr
+            curr = nex_node
+        return prev
+
+Approach :
+1) Initialize two pointers: prev = None and curr = head.
+2) Traverse the linked list using curr.
+3) For each node, store curr.next in a temporary variable.
+4) Reverse the link by setting curr.next = prev, then move prev and curr forward.
+5) When traversal ends, prev will point to the new head of the reversed list — return it.
