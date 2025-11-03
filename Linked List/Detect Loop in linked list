@@ -1,0 +1,35 @@
+Description : You are given the head of a singly linked list. You have to determine whether the given linked list contains a loop or not. 
+              A loop exists in a linked list if the next pointer of the last node points to any other node in the list (including itself), rather than being null.
+
+Soln:
+'''
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+'''
+
+class Solution:
+    def detectLoop(self, head):
+        # code here
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
+        #Space: O(1), Time: O(n)
+
+
+#2 set approach
+
+        '''visited = set()
+        curr = head
+        while curr:
+            if curr in visited:
+                return True
+            visited.add(curr)
+            curr = curr.next
+        return False'''
+        # space: O(n), Time: O(n)
