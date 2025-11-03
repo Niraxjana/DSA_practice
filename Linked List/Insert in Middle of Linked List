@@ -1,0 +1,36 @@
+Description : Given the head of a Singly Linked List and a value x. The task is to insert the key in the middle of the linked list.
+
+Soln : 
+
+class Solution:
+    def insertInMiddle(self, head, x):
+        new_node = Node(x)
+        
+        # If linked list is empty
+        if not head:
+            head = new_node
+            return head
+        
+        slow = head
+        fast = head
+        
+        # Move fast by 2 and slow by 1
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        # Insert after the middle node
+        new_node.next = slow.next
+        slow.next = new_node
+        
+        return head
+
+Approach : 
+
+~Create a new node with the given value x.
+~Check if the list is empty — if yes, make the new node the head and return it.
+~Use two pointers (slow and fast) starting at the head.
+~Move fast by two steps and slow by one step until fast reaches the end — slow will now be at the middle node.
+~Insert the new node after slow by adjusting pointers:
+      >new_node.next = slow.next
+      >slow.next = new_node
