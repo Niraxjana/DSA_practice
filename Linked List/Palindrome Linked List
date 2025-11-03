@@ -1,0 +1,31 @@
+Description : You are given the head of a singly linked list of positive integers. You have to check if the given linked list is palindrome or not.
+
+Example : The given linked list is 1 -> 2 -> 1 -> 1 -> 2 -> 1, which is a palindrome.
+
+Soln : 
+class Solution:
+    def isPalindrome(self, head):
+        slow, fast = head , head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        prev, curr = None, slow
+        while curr:
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
+        left , right = head , prev
+        while right:
+            if left.data != right.data:
+                return False
+            left, right = left.next,right.next
+        return True
+
+Approach : 
+
+~Use slow and fast pointers to find the middle of the linked list.
+~Reverse the second half of the list starting from the middle.
+~Set two pointers — one at the head and one at the reversed half.
+~Compare corresponding nodes from both halves.
+~If all values match → return True, else False.
