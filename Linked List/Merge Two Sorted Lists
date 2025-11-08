@@ -3,18 +3,18 @@ Merge the two lists into one sorted list. The list should be made by splicing to
 Return the head of the merged linked list.
 
 Approach: 
-`Create a dummy node and a pointer curr starting at dummy.
-`While both lists have nodes, compare their values.
-`Attach the smaller node to curr.next.
-`Move the pointer in the list from which you took the node, and move curr forward.
-`When one list becomes empty, attach the remaining nodes of the other list.
-`Return dummy.next (the head of the merged sorted list).
+.Create a dummy node and a pointer curr starting at dummy.
+.While both lists have nodes, compare their values.
+.Attach the smaller node to curr.next.
+.Move the pointer in the list from which you took the node, and move curr forward.
+.When one list becomes empty, attach the remaining nodes of the other list.
+.Return dummy.next (the head of the merged sorted list).
 
 T.c: O(n+m) n,m - length of the two lists
-S.c: O(1)
+S.c: O(1)'''
 
 
-Soln:'''
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
