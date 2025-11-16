@@ -1,0 +1,44 @@
+You are given the head of a singly linked list. If a loop is present in the linked list then return the first node of the loop else return -1.
+
+Approach:
+      ~Use slow (1 step) and fast (2 steps) to detect a cycle.
+      ~If fast or fast.next is None → return -1.
+      ~When slow & fast meet, a loop exists.
+      ~Set p1 = head and keep slow at meeting point.
+      ~Move p1 and slow together 1 step at a time until they meet → that node is the cycle start.
+
+Soln:
+
+class Node:
+    def __init__(self, data):   
+        self.data = data
+        self.next = None
+"""
+class Solution:
+    def cycleStart(self, head):
+        # handle empty list
+        if head is None:
+            return -1
+        slow = fast = head
+
+        #Detect cycle using Floyd's algorithm
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        else:
+            # no cycle
+            return -1
+
+        #Find start of cycle
+        p1 = head
+        while p1 != slow:
+            p1 = p1.next
+            slow = slow.next
+        # return the value 
+        return p1.data
+
+
+TC = O(n)
+SC = O(1)
