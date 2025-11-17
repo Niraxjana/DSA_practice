@@ -1,0 +1,39 @@
+Description:  Given the head of a linked list, determine whether the list contains a loop. If a loop is present, return the number of nodes in the loop, otherwise return 0.
+
+Soln:
+'''
+class Node:
+    def __init__(self, data): 
+        self.data = data
+        self.next = None
+'''
+
+class Solution:
+    def lengthOfLoop(self, head):
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return self.countLoopLength(slow)
+        return 0
+        
+    def countLoopLength(self,node):
+        cnt = 1
+        temp = node.next
+        while temp!= node:
+            cnt+=1
+            temp = temp.next
+        return cnt
+
+
+Approach:
+        ~Start two pointers slow and fast at the head.
+        ~Move slow by one step and fast by two steps until they meet.
+        ~If fast becomes None, the list has no loop, return 0.
+        ~When slow == fast, a loop is detected — send this meeting node to countLoopLength.
+        ~In countLoopLength, start from node.next and set count = 1.
+        ~Move temp forward until it returns to node, incrementing count each step — return this count.
+
+TC = O(n)
+SC = O(1)
