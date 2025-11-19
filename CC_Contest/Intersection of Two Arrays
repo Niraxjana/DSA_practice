@@ -1,0 +1,30 @@
+Given two integer arrays nums1 and nums2, return an array of their intersection. 
+Each element in the result must be unique and you may return the result in any order.
+
+Example 1:
+
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+
+
+Soln:
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        seen = set(nums1)
+        res = []
+        for i in nums2:
+            if i in seen:
+                res.append(i)
+                seen.remove(i)
+        return res
+
+Approach:
+        ~Store all unique elements of nums1 in a set for O(1) lookup.
+        ~Initialize an empty list res to store the intersection.
+        ~Loop through each number in nums2.
+        ~If the number exists in the seen set, add it to res.
+        ~Remove the number from the set so duplicates from nums2 don't get added again.
+        ~Return the list res which contains unique common elements.
+
+(TC): O(n + m)
+(SC): O(n)
