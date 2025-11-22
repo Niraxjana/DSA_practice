@@ -1,0 +1,56 @@
+Given an integer array arr[] and a number k. Find the count of distinct elements in every window of size k in the array.
+
+Examples:
+
+Input: arr[] = [1, 2, 1, 3, 4, 2, 3], k = 4
+Output: [3, 4, 4, 3]
+Explanation:
+First window is [1, 2, 1, 3], count of distinct numbers is 3.
+Second window is [2, 1, 3, 4] count of distinct numbers is 4.
+Third window is [1, 3, 4, 2] count of distinct numbers is 4.
+Fourth window is [3, 4, 2, 3] count of distinct numbers is 3.
+
+Solution:
+class Solution:
+    def countDistinct(self, arr, k):
+        # Code here
+        freq = {}
+        n=len(arr)
+        res = []
+        
+        for i in range(k):
+            freq[arr[i]] = freq.get(arr[i],0)+1
+            
+        res.append(len(freq))
+        
+        for i in range(k,n):
+            out= arr[i-k]
+            freq[out] -=1
+            if freq[out]==0:
+                del freq[out]
+                
+            inc = arr[i]
+            freq[inc]=freq.get(inc, 0) +1
+            
+            res.append(len(freq))
+        
+        return res        
+Approach:
+      ~Use a hashmap (frequency dictionary) to store counts of elements in the current window of size k.
+      ~First, insert the first k elements into the hashmap and record the number of distinct elements.
+      ~Now slide the window one step at a time.
+      ~For each slide, remove the frequency of the outgoing element; if its count becomes zero, delete it from the map.
+      ~Add the incoming element and update its frequency.
+      ~After every slide, append the current hashmap size (distinct element count) to the result.
+
+Time Complexity:
+
+Building the first window takes O(k).
+Sliding the window across the remaining (n − k) elements takes O(n) total, because each element is added and removed at most once.
+Overall: O(n)
+
+Space Complexity:
+
+The hashmap stores at most k elements in a window.
+Overall: O(k)
+
