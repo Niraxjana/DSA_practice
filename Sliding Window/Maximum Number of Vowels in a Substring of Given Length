@@ -1,0 +1,37 @@
+Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+
+Example 1:
+
+Input: s = "abciiidef", k = 3
+Output: 3
+Explanation: The substring "iii" contains 3 vowel letters.
+
+Soln:
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+        vowels=set('aeiou')
+        cnt = 0
+        for i in s[:k]:
+            if i in vowels:
+                cnt+=1
+        max_cnt=cnt
+        for i in range(k,len(s)):
+            if s[i] in vowels:
+                cnt+=1
+            if s[i-k] in vowels:
+                cnt-=1
+            max_cnt=max(max_cnt, cnt)
+        return max_cnt
+
+T.c: O(n)  
+S.c: O(1)
+
+Approach:
+
+~Use a sliding window of size k to count vowels in the first window.
+~Store this initial count as the current maximum.
+~Slide the window one character at a time across the string.
+~For each move, add the new entering character if it’s a vowel.
+~Subtract the character leaving the window if it was a vowel.
+~Update the maximum vowel count after every slide.
+        
